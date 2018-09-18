@@ -7,7 +7,11 @@
 class Module
 {
 public:
-  std::string name;
+  std::string m_name;
+
+  Module(std::string name);
+
+  ~Module();
 };
 
 

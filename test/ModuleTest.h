@@ -33,7 +33,6 @@ class ModuleTest : public ::testing::Test {
 // Tests name member
 TEST_F(ModuleTest, name)
 {
-  Module m;
-  m.name = "My Module";
-  ASSERT_EQ(m.name, "My Module");
+  Module m("My Module");
+  ASSERT_EQ(m.m_name, "My Module");
 }

@@ -17,7 +17,6 @@ INC := -I include
 $(TARGET): $(OBJECTS)
 	@echo " Linking..."
 	@echo " $(CC) $^ -o $(TARGET) $(LIB)"; $(CC) $^ -o $(TARGET) $(LIB)
-	make tests
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(BUILDDIR)
@@ -36,6 +35,6 @@ gtest:
 
 # Unit Tests
 tests: gtest
-	$(CC) $(CFLAGS) -isystem ${GTEST_DIR}/include test/tests.cpp ${BUILDDIR}/libgtest.a $(INC) $(LIB) -o bin/tests
+	$(CC) $(CFLAGS) -isystem ${GTEST_DIR}/include test/tests.cpp ${BUILDDIR}/libgtest.a $(INC) $(LIB) $(filter-out build/ModuleMadness.o, $(OBJECTS)) -o bin/tests
 
 .PHONY: clean
