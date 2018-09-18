@@ -35,6 +35,6 @@ gtest:
 
 # Unit Tests
 tests: gtest
-	$(CC) $(CFLAGS) -isystem ${GTEST_DIR}/include test/tests.cpp ${BUILDDIR}/libgtest.a $(INC) $(LIB) $(filter-out build/ModuleMadness.o, $(OBJECTS)) -o bin/tests
+	$(CC) $(CFLAGS) -isystem ${GTEST_DIR}/include test/tests.cpp ${BUILDDIR}/libgtest.a $(INC) $(LIB) $(filter-out build/ModularMadness.o, $(OBJECTS)) -o bin/tests
 
 .PHONY: clean

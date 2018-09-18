@@ -1,4 +1,4 @@
-#include "ModuleMadness.h"
+#include "ModularMadness.h"
 #include <iostream>
 
 int main()
