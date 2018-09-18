@@ -1,9 +1,5 @@
 #include "gtest/gtest.h"
-
-TEST(HELLO, HI)
-{
-  ASSERT_TRUE(false);
-}
+#include "ModuleTest.h"
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
