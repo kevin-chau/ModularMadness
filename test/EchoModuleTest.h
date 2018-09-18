@@ -1,16 +1,16 @@
-#include "Module.h"
+#include "EchoModule.h"
 
-// The fixture for testing class Module.
-class ModuleTest : public ::testing::Test {
+// The fixture for testing class EchoModule.
+class EchoModuleTest : public ::testing::Test {
  protected:
   // You can remove any or all of the following functions if its body
   // is empty.
 
-  ModuleTest() {
+  EchoModuleTest() {
      // You can do set-up work for each test here.
   }
 
-  ~ModuleTest() override {
+  ~EchoModuleTest() override {
      // You can do clean-up work that doesn't throw exceptions here.
   }
 
@@ -27,12 +27,13 @@ class ModuleTest : public ::testing::Test {
      // before the destructor).
   }
 
-  // Objects declared here can be used by all tests in the test case for Module.
+  // Objects declared here can be used by all tests in the test case for EchoModule.
 };
 
 // Tests name member
-TEST_F(ModuleTest, name)
+TEST_F(EchoModuleTest, process)
 {
-  // Module m("My Module");
-  // ASSERT_EQ(m.m_name, "My Module");
+  EchoModule m("My Echo Module");
+
+  ASSERT_EQ(m.process("Hello"), "HelloHello");
 }
