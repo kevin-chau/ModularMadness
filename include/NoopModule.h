@@ -6,7 +6,14 @@
 /// @brief Noop Module
 class NoopModule : public Module
 {
+public:
+  NoopModule(std::string);
 
+  // Process function should NOOP the input string
+  // ex:
+  //    in - "Hello"
+  //    out - "Hello"
+  std::string process(std::string str);
 };
 
 #endif /* #ifndef __NOOP_MODULE_H__ */

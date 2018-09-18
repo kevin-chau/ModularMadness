@@ -2,6 +2,8 @@
 #include "ModuleTest.h"
 #include "EchoModuleTest.h"
 #include "ReverseModuleTest.h"
+#include "NoopModuleTest.h"
+#include "DelayModuleTest.h"
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

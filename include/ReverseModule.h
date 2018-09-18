@@ -12,7 +12,7 @@ public:
   // Process function should reverse the input string
   // ex:
   //    in - "Hello"
-  //    out - "olleh"
+  //    out - "olleH"
   std::string process(std::string str);
 };
 
