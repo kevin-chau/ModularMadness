@@ -4,16 +4,20 @@ SRCDIR := src
 BUILDDIR := build
 TARGET := bin/ModularMadness
 
+# Google Test directory
+GTEST_DIR := lib/googletest
+
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 CFLAGS := -g # -Wall
-# LIB := -pthread
+LIB := -pthread
 INC := -I include
 
 $(TARGET): $(OBJECTS)
 	@echo " Linking..."
 	@echo " $(CC) $^ -o $(TARGET) $(LIB)"; $(CC) $^ -o $(TARGET) $(LIB)
+	make tests
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@mkdir -p $(BUILDDIR)
@@ -23,8 +27,15 @@ clean:
 	@echo " Cleaning...";
 	@echo " $(RM) -r $(BUILDDIR) $(TARGET)"; $(RM) -r $(BUILDDIR) $(TARGET)
 
-# Tests
-tester:
-	$(CC) $(CFLAGS) test/tests.cpp $(INC) $(LIB) -o bin/tests
+# Google Test
+gtest:
+	@mkdir -p $(BUILDDIR)
+	$(CC) -isystem ${GTEST_DIR}/include -I${GTEST_DIR} \
+		-pthread -c ${GTEST_DIR}/src/gtest-all.cc -o $(BUILDDIR)/gtest-all.o
+	ar -rv $(BUILDDIR)/libgtest.a ${BUILDDIR}/gtest-all.o
+
+# Unit Tests
+tests: gtest
+	$(CC) $(CFLAGS) -isystem ${GTEST_DIR}/include test/tests.cpp ${BUILDDIR}/libgtest.a $(INC) $(LIB) -o bin/tests
 
 .PHONY: clean
