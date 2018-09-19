@@ -31,8 +31,27 @@ class ModuleTest : public ::testing::Test {
 };
 
 // Tests name member
-TEST_F(ModuleTest, name)
+TEST_F(ModuleTest, connectOutputTo)
 {
-  // Module m("My Module");
-  // ASSERT_EQ(m.m_name, "My Module");
+  Module m1("My Module 1");
+  Module m2("My Module 2");
+
+  m1.connectOutputTo(&m2);
+
+  ASSERT_EQ(m1.m_output_connection->m_name, "My Module 2");
+
+  ASSERT_EQ(m2.m_input_connections[0]->m_name, "My Module 1");
+}
+
+// Tests name member
+TEST_F(ModuleTest, connectInputTo)
+{
+  Module m1("My Module 1");
+  Module m2("My Module 2");
+
+  m1.connectInputTo(&m2);
+
+  ASSERT_EQ(m1.m_input_connections[0]->m_name, "My Module 2");
+
+  ASSERT_EQ(m2.m_output_connection->m_name, "My Module 1");
 }

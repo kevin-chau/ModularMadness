@@ -24,9 +24,9 @@ public:
   ~Module();
 
   ///
-  void connectOutputTo(Module& m);
+  void connectOutputTo(Module * m);
 
-  void connectInputTo(Module& m);
+  void connectInputTo(Module * m);
 
   std::string process(std::string str);
 };
