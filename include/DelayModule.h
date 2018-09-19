@@ -15,7 +15,7 @@ public:
   //    out - "hello"
   //    in - "Bar"
   //    out - "Foo"
-  std::string process(std::string str);
+  virtual std::string process(std::string str);
 private:
   std::string m_previousStr = "hello";
 };

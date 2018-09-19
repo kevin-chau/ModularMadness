@@ -7,7 +7,8 @@
 
 using namespace std;
 
-std::map<std::string, Module> ModularMadness::modules;
+map<string, Module> ModularMadness::m_modules;
+Module * ModularMadness::m_first_module = NULL;
 
 void ModularMadness::defineModule(string name, string operation)
 {
@@ -17,7 +18,14 @@ void ModularMadness::defineModule(string name, string operation)
     EchoModule m(name);
 
     // Push to map of modules
-    modules.insert(pair<string,Module>(name, m));
+    m_modules.insert(pair<string,Module>(name, m));
+
+    // Check if first module defined
+    if (m_first_module == NULL)
+    {
+      // Save a pointer to the first module
+      m_first_module = &m;
+    }
   }
   else if (operation == "delay")
   {
@@ -25,7 +33,14 @@ void ModularMadness::defineModule(string name, string operation)
     DelayModule m(name);
 
     // Push to map of modules
-    modules.insert(pair<string,Module>(name, m));
+    m_modules.insert(pair<string,Module>(name, m));
+
+    // Check if first module defined
+    if (m_first_module == NULL)
+    {
+      // Save a pointer to the first module
+      m_first_module = &m;
+    }
   }
   else if (operation == "noop")
   {
@@ -33,7 +48,14 @@ void ModularMadness::defineModule(string name, string operation)
     NoopModule m(name);
 
     // Push to map of modules
-    modules.insert(pair<string,Module>(name, m));
+    m_modules.insert(pair<string,Module>(name, m));
+
+    // Check if first module defined
+    if (m_first_module == NULL)
+    {
+      // Save a pointer to the first module
+      m_first_module = &m;
+    }
   }
   else if (operation == "reverse")
   {
@@ -41,7 +63,14 @@ void ModularMadness::defineModule(string name, string operation)
     ReverseModule m(name);
 
     // Push to map of modules
-    modules.insert(pair<string,Module>(name, m));
+    m_modules.insert(pair<string,Module>(name, m));
+
+    // Check if first module defined
+    if (m_first_module == NULL)
+    {
+      // Save a pointer to the first module
+      m_first_module = &m;
+    }
   }
 }
 
@@ -84,14 +113,50 @@ void ModularMadness::loop()
     // Check if the command is a process command
     else if (command == "process")
     {
+      // Get the input strings
+      string input_line;
+      getline(cin, input_line);
 
+      istringstream iss(input_line);
+      vector<string> tokens{istream_iterator<string>{iss},
+                      istream_iterator<string>{}};
+      for (vector<string>::iterator it = tokens.begin(); it != tokens.end(); it++)
+      {
+        process(*it);
+      }
     }
   }
 }
 
-void ModularMadness::connectModules(std::string module_name1, std::string module_name2)
+void ModularMadness::connectModules(string module_name1, string module_name2)
 {
+  // Lookup the modules by name
+  Module m1 = m_modules.find(module_name1)->second;
+  Module m2 = m_modules.find(module_name2)->second;
+
   // Connect the modules
+  m1.connectOutputTo(&m2);
+}
+
+void ModularMadness::process(string str)
+{
+  Module * m = m_first_module;
+
+  string output;
+  string input = str;
+
+  // Loop through modules
+  while (m != NULL)
+  {
+    cout << "Name: " << m->m_name << endl;
+    // output = m->process(input);
+    // cout << "Output: " << output << endl;
+    // input = output;
+    m = m->m_output_connection;
+  }
+
+  // cout << output << endl;
+
 }
 
 int main()

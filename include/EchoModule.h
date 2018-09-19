@@ -13,7 +13,7 @@ public:
   // ex:
   //    in - "Hello"
   //    out - "HelloHello"
-  std::string process(std::string str);
+  virtual std::string process(std::string str);
 };
 
 #endif /* #ifndef __ECHO_MODULE_H__ */

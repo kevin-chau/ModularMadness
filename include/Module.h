@@ -15,7 +15,7 @@ public:
   std::vector<Module*> m_input_connections;
 
   /// @brief output module
-  Module * m_output_connection;
+  Module * m_output_connection = NULL;
 
   /// @brief Constructor
   Module(std::string name);
@@ -28,7 +28,7 @@ public:
 
   void connectInputTo(Module * m);
 
-  std::string process(std::string str);
+  virtual std::string process(std::string str);
 };
 
 

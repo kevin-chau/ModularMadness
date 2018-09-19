@@ -27,3 +27,8 @@ void Module::connectInputTo(Module * m)
   // Make the reverse link
   this->m_input_connections.push_back(m);
 }
+
+std::string Module::process(std::string str)
+{
+  return "???";
+}

@@ -29,9 +29,15 @@ public:
   /// @return void
   static void connectModules(std::string module_name1, std::string module_name2);
 
+  ///
+  static void process(std::string str);
+
 private:
   // Map of modules, keyed by name
-  static std::map<std::string, Module> modules;
+  static std::map<std::string, Module> m_modules;
+
+  // First module defined
+  static Module * m_first_module;
 };
 
 #endif /* #ifndef __MODULAR_MADNESS_H__ */

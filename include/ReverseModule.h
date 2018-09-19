@@ -13,7 +13,7 @@ public:
   // ex:
   //    in - "Hello"
   //    out - "olleH"
-  std::string process(std::string str);
+  virtual std::string process(std::string str);
 };
 
 #endif /* #ifndef __REVERSE_MODULE_H__ */
