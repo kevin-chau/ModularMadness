@@ -7,7 +7,7 @@
 
 using namespace std;
 
-map<string, Module> ModularMadness::m_modules;
+map<string, Module*> ModularMadness::m_modules;
 Module * ModularMadness::m_first_module = NULL;
 
 void ModularMadness::defineModule(string name, string operation)
@@ -15,61 +15,61 @@ void ModularMadness::defineModule(string name, string operation)
   if (operation == "echo")
   {
     // Create EchoModule
-    EchoModule m(name);
+    EchoModule * em = new EchoModule(name);
 
     // Push to map of modules
-    m_modules.insert(pair<string,Module>(name, m));
+    m_modules.insert(pair<string,Module*>(name, em));
 
     // Check if first module defined
     if (m_first_module == NULL)
     {
       // Save a pointer to the first module
-      m_first_module = &m;
+      m_first_module = em;
     }
   }
   else if (operation == "delay")
   {
     // Create DelayModule
-    DelayModule m(name);
+    DelayModule * dm = new DelayModule(name);
 
     // Push to map of modules
-    m_modules.insert(pair<string,Module>(name, m));
+    m_modules.insert(pair<string,Module*>(name, dm));
 
     // Check if first module defined
     if (m_first_module == NULL)
     {
       // Save a pointer to the first module
-      m_first_module = &m;
+      m_first_module = dm;
     }
   }
   else if (operation == "noop")
   {
     // Create NoopModule
-    NoopModule m(name);
+    NoopModule * nm = new NoopModule(name);
 
     // Push to map of modules
-    m_modules.insert(pair<string,Module>(name, m));
+    m_modules.insert(pair<string,Module*>(name, nm));
 
     // Check if first module defined
     if (m_first_module == NULL)
     {
       // Save a pointer to the first module
-      m_first_module = &m;
+      m_first_module = nm;
     }
   }
   else if (operation == "reverse")
   {
     // Create ReverseModule
-    ReverseModule m(name);
+    ReverseModule * rm = new ReverseModule(name);
 
     // Push to map of modules
-    m_modules.insert(pair<string,Module>(name, m));
+    m_modules.insert(pair<string,Module*>(name, rm));
 
     // Check if first module defined
     if (m_first_module == NULL)
     {
       // Save a pointer to the first module
-      m_first_module = &m;
+      m_first_module = rm;
     }
   }
 }
@@ -131,29 +131,34 @@ void ModularMadness::loop()
 void ModularMadness::connectModules(string module_name1, string module_name2)
 {
   // Lookup the modules by name
-  Module m1 = m_modules.find(module_name1)->second;
-  Module m2 = m_modules.find(module_name2)->second;
+  Module * m1 = m_modules.find(module_name1)->second;
+  Module * m2 = m_modules.find(module_name2)->second;
 
   // Connect the modules
-  m1.connectOutputTo(&m2);
+  m1->connectOutputTo(m2);
 }
 
 void ModularMadness::process(string str)
 {
-  Module * m = m_first_module;
+  string output = m_first_module->process(str);
 
-  string output;
-  string input = str;
+  cout << "Output: " << output << endl;
 
-  // Loop through modules
-  while (m != NULL)
-  {
-    cout << "Name: " << m->m_name << endl;
-    // output = m->process(input);
-    // cout << "Output: " << output << endl;
-    // input = output;
-    m = m->m_output_connection;
-  }
+
+  // Module * m = m_first_module;
+  //
+  // string output;
+  // string input = str;
+  //
+  // // Loop through modules
+  // while (m != NULL)
+  // {
+  //   cout << "Name: " << m->m_name << endl;
+  //   // output = m->process(input);
+  //   // cout << "Output: " << output << endl;
+  //   // input = output;
+  //   m = m->m_output_connection;
+  // }
 
   // cout << output << endl;
 

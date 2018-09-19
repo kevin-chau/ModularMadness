@@ -13,6 +13,9 @@
 class ModularMadness
 {
 public:
+  ModularMadness();
+  ~ModularMadness();
+
   /// main loop
   static void loop();
 
@@ -34,7 +37,7 @@ public:
 
 private:
   // Map of modules, keyed by name
-  static std::map<std::string, Module> m_modules;
+  static std::map<std::string, Module *> m_modules;
 
   // First module defined
   static Module * m_first_module;
