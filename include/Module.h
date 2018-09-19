@@ -12,10 +12,10 @@ public:
   std::string m_name;
 
   /// @brief input modules
-  std::vector<Module*> m_inputs;
+  std::vector<Module*> m_input_connections;
 
   /// @brief output module
-  Module * m_output;
+  Module * m_output_connection;
 
   /// @brief Constructor
   Module(std::string name);
@@ -28,7 +28,7 @@ public:
 
   void connectInputTo(Module& m);
 
-  virtual std::string process(std::string str) = 0;
+  std::string process(std::string str);
 };
 
 
