@@ -4,6 +4,7 @@
 #include "ReverseModuleTest.h"
 #include "NoopModuleTest.h"
 #include "DelayModuleTest.h"
+#include "ModularMadnessTest.h"
 
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);

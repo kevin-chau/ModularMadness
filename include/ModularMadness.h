@@ -32,10 +32,23 @@ public:
   /// @return void
   static void connectModules(std::string module_name1, std::string module_name2);
 
+  /// @brief send a string through the module stream
   ///
+  /// @param[in] str - the string to input into the module stream
+  /// @return void
   static void process(std::string str);
 
 private:
+  /// @brief handle the "module" command
+  static void handleModuleCommand();
+
+  /// @brief handle the "connect" command
+  static void handleConnectCommand();
+
+  /// @brief handle the "process" command
+  static void handleProcessCommand();
+
+
   // Map of modules, keyed by name
   static std::map<std::string, Module *> m_modules;
 

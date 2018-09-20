@@ -86,77 +86,19 @@ void ModularMadness::loop()
     // Check if the command is a module definition command
     if (command == "module")
     {
-      // Read in the module name
-      string name;
-      cin >> name;
-
-      // Read in the operation
-      string operation;
-      cin >> operation;
-
-      defineModule(name, operation);
+      // Handle the "module" command
+      handleModuleCommand();
     }
     // Check if the command is a connect command
     else if (command == "connect")
     {
-      // Read in the first module name
-      string module_name1;
-      cin >> module_name1;
-
-      // Read in the second module name
-      string module_name2;
-      cin >> module_name2;
-
-      // Connect the modules
-      connectModules(module_name1, module_name2);
+      // Handle the "connect" command
+      handleConnectCommand();
     }
     // Check if the command is a process command
     else if (command == "process")
     {
-      // Get the input strings
-      string input_line;
-      getline(cin, input_line);
-
-      // Tokenize the input strings
-      istringstream iss(input_line);
-      vector<string> tokens{istream_iterator<string>{iss},
-                      istream_iterator<string>{}};
-      for (vector<string>::iterator it = tokens.begin(); it != tokens.end(); it++)
-      {
-        // Process the token
-        process(*it);
-
-        // Check if there's another token
-        if ((it+1) != tokens.end())
-        {
-          // Output a space before the next output string
-          cout << " ";
-        }
-      }
-
-      // Search for a delay module in the stream
-      Module * m = m_first_module;
-      while (m != NULL)
-      {
-        // look for DELAY operation type
-        if (m->m_operation == Module::DELAY)
-        {
-          // Output a space before the last output string
-          cout << " ";
-
-          // Process empty dummy string
-          process("");
-
-          // Reset the delay module
-          ((DelayModule*)m)->reset();
-        }
-
-        // Iterate to the next module
-        m = m->m_output_connection;
-      }
-
-      // Output new line character
-      cout << endl;
+      // Handle the "process" command
     }
   }
 }
@@ -193,6 +135,84 @@ void ModularMadness::process(string str)
 
   // Print to screen
   cout << output;
+}
+
+/// @brief handle the "module" command
+void ModularMadness::handleModuleCommand()
+{
+  // Read in the module name
+  string name;
+  cin >> name;
+
+  // Read in the operation
+  string operation;
+  cin >> operation;
+
+  defineModule(name, operation);
+}
+
+/// @brief handle the "connect" command
+void ModularMadness::handleConnectCommand()
+{
+  // Read in the first module name
+  string module_name1;
+  cin >> module_name1;
+
+  // Read in the second module name
+  string module_name2;
+  cin >> module_name2;
+
+  // Connect the modules
+  connectModules(module_name1, module_name2);
+}
+
+/// @brief handle the "process" command
+void ModularMadness::handleProcessCommand()
+{
+  // Get the input strings
+  string input_line;
+  getline(cin, input_line);
+
+  // Tokenize the input strings
+  istringstream iss(input_line);
+  vector<string> tokens{istream_iterator<string>{iss},
+                  istream_iterator<string>{}};
+  for (vector<string>::iterator it = tokens.begin(); it != tokens.end(); it++)
+  {
+    // Process the token
+    process(*it);
+
+    // Check if there's another token
+    if ((it+1) != tokens.end())
+    {
+      // Output a space before the next output string
+      cout << " ";
+    }
+  }
+
+  // Search for a delay module in the stream
+  Module * m = m_first_module;
+  while (m != NULL)
+  {
+    // look for DELAY operation type
+    if (m->m_operation == Module::DELAY)
+    {
+      // Output a space before the last output string
+      cout << " ";
+
+      // Process empty dummy string
+      process("");
+
+      // Reset the delay module
+      ((DelayModule*)m)->reset();
+    }
+
+    // Iterate to the next module
+    m = m->m_output_connection;
+  }
+
+  // Output new line character
+  cout << endl;
 }
 
 int main()
