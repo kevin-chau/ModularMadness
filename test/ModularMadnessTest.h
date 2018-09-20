@@ -127,7 +127,7 @@ TEST_F(ModularMadnessTest, double_process)
 //   hellohellohellohellohellohellohellohello worldworldworldworldworldworldworldworld
 //   hellohellohellohellohellohellohellohello worldworldworldworldworldworldworldworld
 TEST_F(ModularMadnessTest, three_echos)
-{  
+{
   // Simulates standard input: "module a echo"
   ModularMadness::defineModule("a", "echo");
 
@@ -166,6 +166,42 @@ TEST_F(ModularMadnessTest, three_echos)
 
   // Assert equal to the expect example output
   ASSERT_EQ(output, "hellohellohellohellohellohellohellohello worldworldworldworldworldworldworldworld");
+
+  // Reset the ModularMadness class
+  ModularMadness::reset();
+}
+
+
+// Tests multiple process commands, which should "behave the same way as if input alone"
+// Example Input
+//   module a noop
+//   module b noop
+//   connect a b
+//   process hello world
+// Output
+//   hello world
+TEST_F(ModularMadnessTest, two_noops)
+{
+  // Simulates standard input: "module a echo"
+  ModularMadness::defineModule("a", "noop");
+
+  // Simulates standard input: "module b echo"
+  ModularMadness::defineModule("b", "noop");
+
+  // Simulates standard input: "connect a b"
+  ModularMadness::connectModules("a", "b");
+
+  // Start capturing standard out
+  testing::internal::CaptureStdout();
+
+  // Simulates standard input: "process hello world"
+  ModularMadness::handleProcessCommand("hello world");
+
+  // Get the captured output
+  std::string output = testing::internal::GetCapturedStdout();
+
+  // Assert equal to the expect example output
+  ASSERT_EQ(output, "hello world");
 
   // Reset the ModularMadness class
   ModularMadness::reset();
