@@ -14,7 +14,10 @@ class ModularMadness
 {
 public:
   ModularMadness();
-  ~ModularMadness();
+  ~ModularMadness()
+  {
+    reset();
+  }
 
   /// main loop
   static void loop();
@@ -44,6 +47,22 @@ public:
   /// @return void
   static void handleProcessCommand(std::string input_line);
 
+  /// @reset this class (clear the modules map)
+  static void reset()
+  {
+    // Reset the first module pointer
+    m_first_module = NULL;
+
+    // Loop through the map for cleanup
+    for (std::map<std::string,Module *>::iterator it=m_modules.begin(); it!=m_modules.end(); ++it)
+    {
+      // Delete each module
+      delete it->second;
+    }
+
+    // Clear the map
+    m_modules.clear();
+  }
 
 private:
   /// @brief handle the "module" command
