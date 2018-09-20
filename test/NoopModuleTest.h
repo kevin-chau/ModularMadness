@@ -37,3 +37,11 @@ TEST_F(NoopModuleTest, process)
 
   ASSERT_EQ(m.process("Hello"), "Hello");
 }
+
+TEST_F(NoopModuleTest, operation)
+{
+  NoopModule m("My Noop Module");
+
+  // First output is "hello"
+  ASSERT_EQ(m.operation, Module::NOOP);
+}

@@ -37,3 +37,11 @@ TEST_F(ReverseModuleTest, process)
 
   ASSERT_EQ(m.process("Hello"), "olleH");
 }
+
+TEST_F(ReverseModuleTest, operation)
+{
+  ReverseModule m("My Reverse Module");
+
+  // First output is "hello"
+  ASSERT_EQ(m.operation, Module::REVERSE);
+}

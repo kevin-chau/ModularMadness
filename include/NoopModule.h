@@ -14,6 +14,9 @@ public:
   //    in - "Hello"
   //    out - "Hello"
   virtual std::string process(std::string str);
+
+  /// Module operation type
+  ModuleOperation operation = NOOP;
 };
 
 #endif /* #ifndef __NOOP_MODULE_H__ */

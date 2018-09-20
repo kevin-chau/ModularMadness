@@ -29,6 +29,18 @@ public:
   void connectInputTo(Module * m);
 
   virtual std::string process(std::string str);
+
+  /// Enumeration used to identify the module operation type
+  enum ModuleOperation
+  {
+    ECHO = 0,
+    DELAY,
+    REVERSE,
+    NOOP
+  };
+
+  /// Module operation type
+  ModuleOperation operation;
 };
 
 

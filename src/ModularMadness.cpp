@@ -140,27 +140,29 @@ void ModularMadness::connectModules(string module_name1, string module_name2)
 
 void ModularMadness::process(string str)
 {
-  string output = m_first_module->process(str);
+  Module * m = m_first_module;
 
-  cout << "Output: " << output << endl;
+  string output;
+  string input = str;
 
+  // Loop through modules
+  while (m != NULL)
+  {
+    // Process the input from the previous module
+    output = m->process(input);
 
-  // Module * m = m_first_module;
-  //
-  // string output;
-  // string input = str;
-  //
-  // // Loop through modules
-  // while (m != NULL)
-  // {
-  //   cout << "Name: " << m->m_name << endl;
-  //   // output = m->process(input);
-  //   // cout << "Output: " << output << endl;
-  //   // input = output;
-  //   m = m->m_output_connection;
-  // }
+    // Make the output of the current module the input o the next module
+    input = output;
 
-  // cout << output << endl;
+    // Iterate to the next module
+    m = m->m_output_connection;
+  }
+
+  // Print to screen
+  cout << output << " ";
+
+  // If there is a delay module in the stream, we need to process one more time
+  
 
 }
 

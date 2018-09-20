@@ -16,6 +16,9 @@ public:
   //    in - "Bar"
   //    out - "Foo"
   virtual std::string process(std::string str);
+
+  /// Module operation type
+  ModuleOperation operation = DELAY;
 private:
   std::string m_previousStr = "hello";
 };
