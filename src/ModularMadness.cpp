@@ -147,9 +147,6 @@ void ModularMadness::loop()
           // Process empty dummy string
           process("");
 
-          // Output new line character
-          cout << endl;
-
           // Reset the delay module
           ((DelayModule*)m)->reset();
         }
@@ -157,6 +154,9 @@ void ModularMadness::loop()
         // Iterate to the next module
         m = m->m_output_connection;
       }
+
+      // Output new line character
+      cout << endl;
     }
   }
 }
