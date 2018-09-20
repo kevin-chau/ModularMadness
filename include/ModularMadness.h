@@ -38,16 +38,19 @@ public:
   /// @return void
   static void process(std::string str);
 
+  /// @brief handle the "process" command
+  ///
+  /// @param[in] input_line - the input strings to be processed
+  /// @return void
+  static void handleProcessCommand(std::string input_line);
+
+
 private:
   /// @brief handle the "module" command
   static void handleModuleCommand();
 
   /// @brief handle the "connect" command
   static void handleConnectCommand();
-
-  /// @brief handle the "process" command
-  static void handleProcessCommand();
-
 
   // Map of modules, keyed by name
   static std::map<std::string, Module *> m_modules;

@@ -30,18 +30,34 @@ class ModularMadnessTest : public ::testing::Test {
   // Objects declared here can be used by all tests in the test case for ModularMadness.
 };
 
-// Tests process function
+// Tests the program example in the spec
+// Example Input
+//   module alpha reverse
+//   module beta delay
+//   connect alpha beta
+//   process hello world
+// Output
+//   hello olleh dlrow
 TEST_F(ModularMadnessTest, example)
 {
   // Simulates standard input: "module alpha reverse"
-  defineModule("alpha", "reverse");
+  ModularMadness::defineModule("alpha", "reverse");
 
   // Simulates standard input: "module beta delay"
-  defineModule("beta", "delay");
+  ModularMadness::defineModule("beta", "delay");
 
   // Simulates standard input: "connect alpha beta"
-  connectModules("alpha", "beta");
+  ModularMadness::connectModules("alpha", "beta");
+
+  // Start capturing standard out
+  testing::internal::CaptureStdout();
 
   // Simulates standard input: "process hello world"
-  defineModule("alpha", "reverse")l
+  ModularMadness::handleProcessCommand("hello world");
+
+  // Get the captured output
+  std::string output = testing::internal::GetCapturedStdout();
+
+  // Assert equal to the expect example output
+  ASSERT_EQ(output, "hello olleh dlrow");
 }

@@ -98,7 +98,15 @@ void ModularMadness::loop()
     // Check if the command is a process command
     else if (command == "process")
     {
+      // Get the input strings
+      string input_line;
+      getline(cin, input_line);
+
       // Handle the "process" command
+      handleProcessCommand(input_line);
+
+      // Output new line character
+      cout << endl;
     }
   }
 }
@@ -167,12 +175,8 @@ void ModularMadness::handleConnectCommand()
 }
 
 /// @brief handle the "process" command
-void ModularMadness::handleProcessCommand()
+void ModularMadness::handleProcessCommand(string input_line)
 {
-  // Get the input strings
-  string input_line;
-  getline(cin, input_line);
-
   // Tokenize the input strings
   istringstream iss(input_line);
   vector<string> tokens{istream_iterator<string>{iss},
@@ -210,17 +214,4 @@ void ModularMadness::handleProcessCommand()
     // Iterate to the next module
     m = m->m_output_connection;
   }
-
-  // Output new line character
-  cout << endl;
-}
-
-int main()
-{
-  cout << "Welcome to Modular Madness!" << endl;
-
-  // Loop on forever
-  ModularMadness::loop();
-
-  return 0;
 }
