@@ -17,8 +17,11 @@ public:
   //    out - "Foo"
   virtual std::string process(std::string str);
 
-  /// Module operation type
-  ModuleOperation operation = DELAY;
+  // Reset the delay module, so that the next initial output is "hello"
+  void reset()
+  {
+    m_previousStr = "hello";
+  }
 private:
   std::string m_previousStr = "hello";
 };

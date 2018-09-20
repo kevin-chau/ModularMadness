@@ -40,7 +40,7 @@ public:
   };
 
   /// Module operation type
-  ModuleOperation operation;
+  ModuleOperation m_operation;
 };
 
 

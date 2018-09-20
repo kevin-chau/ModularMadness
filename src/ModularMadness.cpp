@@ -117,12 +117,45 @@ void ModularMadness::loop()
       string input_line;
       getline(cin, input_line);
 
+      // Tokenize the input strings
       istringstream iss(input_line);
       vector<string> tokens{istream_iterator<string>{iss},
                       istream_iterator<string>{}};
       for (vector<string>::iterator it = tokens.begin(); it != tokens.end(); it++)
       {
+        // Process the token
         process(*it);
+
+        // Check if there's another token
+        if ((it+1) != tokens.end())
+        {
+          // Output a space before the next output string
+          cout << " ";
+        }
+      }
+
+      // Search for a delay module in the stream
+      Module * m = m_first_module;
+      while (m != NULL)
+      {
+        // look for DELAY operation type
+        if (m->m_operation == Module::DELAY)
+        {
+          // Output a space before the last output string
+          cout << " ";
+
+          // Process empty dummy string
+          process("");
+
+          // Output new line character
+          cout << endl;
+
+          // Reset the delay module
+          ((DelayModule*)m)->reset();
+        }
+
+        // Iterate to the next module
+        m = m->m_output_connection;
       }
     }
   }
@@ -159,11 +192,7 @@ void ModularMadness::process(string str)
   }
 
   // Print to screen
-  cout << output << " ";
-
-  // If there is a delay module in the stream, we need to process one more time
-  
-
+  cout << output;
 }
 
 int main()

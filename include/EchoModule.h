@@ -14,9 +14,6 @@ public:
   //    in - "Hello"
   //    out - "HelloHello"
   virtual std::string process(std::string str);
-
-  /// Module operation type
-  ModuleOperation operation = ECHO;
 };
 
 #endif /* #ifndef __ECHO_MODULE_H__ */

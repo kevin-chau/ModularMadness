@@ -2,6 +2,7 @@
 
 DelayModule::DelayModule(std::string name) : Module(name)
 {
+  m_operation = Module::DELAY;
 }
 
 std::string DelayModule::process(std::string str)

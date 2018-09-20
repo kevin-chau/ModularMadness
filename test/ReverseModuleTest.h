@@ -43,5 +43,5 @@ TEST_F(ReverseModuleTest, operation)
   ReverseModule m("My Reverse Module");
 
   // First output is "hello"
-  ASSERT_EQ(m.operation, Module::REVERSE);
+  ASSERT_EQ(m.m_operation, Module::REVERSE);
 }

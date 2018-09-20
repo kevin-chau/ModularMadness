@@ -50,5 +50,5 @@ TEST_F(DelayModuleTest, operation)
   DelayModule m("My Delay Module");
 
   // First output is "hello"
-  ASSERT_EQ(m.operation, Module::DELAY);
+  ASSERT_EQ(m.m_operation, Module::DELAY);
 }

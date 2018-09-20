@@ -43,5 +43,5 @@ TEST_F(EchoModuleTest, operation)
   EchoModule m("My Echo Module");
 
   // First output is "hello"
-  ASSERT_EQ(m.operation, Module::ECHO);
+  ASSERT_EQ(m.m_operation, Module::ECHO);
 }

@@ -14,9 +14,6 @@ public:
   //    in - "Hello"
   //    out - "olleH"
   virtual std::string process(std::string str);
-
-  /// Module operation type
-  ModuleOperation operation = REVERSE;
 };
 
 #endif /* #ifndef __REVERSE_MODULE_H__ */

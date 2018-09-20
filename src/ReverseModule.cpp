@@ -3,7 +3,7 @@
 
 ReverseModule::ReverseModule(std::string name) : Module(name)
 {
-
+  m_operation = Module::REVERSE;
 }
 
 std::string ReverseModule::process(std::string str)

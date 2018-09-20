@@ -43,5 +43,5 @@ TEST_F(NoopModuleTest, operation)
   NoopModule m("My Noop Module");
 
   // First output is "hello"
-  ASSERT_EQ(m.operation, Module::NOOP);
+  ASSERT_EQ(m.m_operation, Module::NOOP);
 }
