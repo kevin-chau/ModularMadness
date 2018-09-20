@@ -16,6 +16,7 @@ LIB := -pthread
 INC := -I include
 
 $(TARGET): $(OBJECTS)
+	@mkdir -p $(TARGETDIR)
 	@echo " Linking..."
 	@echo " $(CC) $^ -o $(TARGET) $(LIB)"; $(CC) $^ -o $(TARGET) $(LIB)
 
