@@ -1,5 +1,15 @@
 # Modular Madness
+To compile the program, run `make`
 
+The program will be placed in the `bin` directory. `cd` to `bin`, then execute the program like so:
+```
+./ModularMadness
+```
+
+To compile the test suite, run `make tests`
+
+You can execute the test suite by going into the `bin` directory and running `./tests`
 
 # To-Do:
-- [ ] Auto pointers for module connections
+- [ ] Implement signal summing for multiple inputs
+- [ ] Limit output strings to sixteen times the number of input strings

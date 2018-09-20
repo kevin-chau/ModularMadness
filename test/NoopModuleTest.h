@@ -30,7 +30,7 @@ class NoopModuleTest : public ::testing::Test {
   // Objects declared here can be used by all tests in the test case for NoopModule.
 };
 
-// Tests name member
+// Tests process function
 TEST_F(NoopModuleTest, process)
 {
   NoopModule m("My Noop Module");

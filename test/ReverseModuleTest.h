@@ -30,7 +30,7 @@ class ReverseModuleTest : public ::testing::Test {
   // Objects declared here can be used by all tests in the test case for ReverseModule.
 };
 
-// Tests name member
+// Tests process function
 TEST_F(ReverseModuleTest, process)
 {
   ReverseModule m("My Reverse Module");
