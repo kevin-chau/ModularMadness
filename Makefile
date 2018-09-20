@@ -2,7 +2,8 @@ CC := g++ # This is the main compiler
 # CC := clang --analyze # and comment out the linker last line for sanity
 SRCDIR := src
 BUILDDIR := build
-TARGET := bin/ModularMadness
+TARGETDIR := bin
+TARGET := $(TARGETDIR)/ModularMadness
 
 # Google Test directory
 GTEST_DIR := lib/googletest
